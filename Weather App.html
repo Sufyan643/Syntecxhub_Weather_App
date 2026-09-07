@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkyBoard — Live Weather</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="Weather App.css" />
+</head>
+<body>
+
+  <div class="board-wrap">
+
+    <!-- Header -->
+    <header class="board-header">
+      <div class="brand">
+        <span class="brand-mark">&#9729;</span>
+        <span class="brand-name">SkyBoard</span>
+      </div>
+      <div class="header-right">
+        <div class="board-clock" id="clock">--:--:--</div>
+        <button type="button" class="icon-btn" id="keyBtn" title="Update API key" aria-label="Update API key">&#9881;</button>
+      </div>
+    </header>
+
+    <!-- Search -->
+    <form class="search-row" id="searchForm" autocomplete="off">
+      <label for="cityInput" class="visually-hidden">Search city</label>
+      <input
+        type="text"
+        id="cityInput"
+        name="city"
+        placeholder="Search a city — e.g. Lahore, Tokyo, Oslo"
+        aria-label="Search city"
+      />
+      <button type="submit" id="searchBtn">Search</button>
+    </form>
+
+    <!-- Status / error line -->
+    <p class="status-line" id="statusLine" role="status" aria-live="polite"></p>
+
+    <!-- Main board -->
+    <main class="board" id="board">
+
+      <!-- Left: primary readout -->
+      <section class="board-primary">
+        <div class="board-row board-row--city">
+          <span class="row-label">CITY</span>
+          <span class="row-value" id="cityName">— — —</span>
+        </div>
+
+        <div class="temp-block">
+          <div class="temp-number" id="tempValue">--</div>
+          <div class="temp-unit-toggle">
+            <button type="button" class="unit-btn active" id="unitC" aria-pressed="true">&deg;C</button>
+            <button type="button" class="unit-btn" id="unitF" aria-pressed="false">&deg;F</button>
+          </div>
+        </div>
+
+        <div class="condition-row">
+          <img id="weatherIcon" class="weather-icon" alt="" />
+          <div class="condition-text">
+            <span id="conditionMain">— —</span>
+            <span id="conditionDesc" class="condition-desc">Waiting for data…</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right: split-flap style data rows -->
+      <section class="board-secondary" aria-label="Weather details">
+        <div class="data-row">
+          <span class="row-label">FEELS LIKE</span>
+          <span class="row-value" id="feelsLike">--</span>
+        </div>
+        <div class="data-row">
+          <span class="row-label">HUMIDITY</span>
+          <span class="row-value" id="humidity">--</span>
+        </div>
+        <div class="data-row">
+          <span class="row-label">WIND</span>
+          <span class="row-value" id="wind">--</span>
+        </div>
+        <div class="data-row">
+          <span class="row-label">PRESSURE</span>
+          <span class="row-value" id="pressure">--</span>
+        </div>
+        <div class="data-row">
+          <span class="row-label">VISIBILITY</span>
+          <span class="row-value" id="visibility">--</span>
+        </div>
+        <div class="data-row">
+          <span class="row-label">SUNRISE / SUNSET</span>
+          <span class="row-value" id="sunTimes">-- / --</span>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="board-footer">
+      <p>
+        Data by <a href="https://openweathermap.org/" target="_blank" rel="noopener">OpenWeatherMap</a>
+        &middot; Built for Syntecxhub Internship — Project 1
+      </p>
+    </footer>
+  </div>
+
+  <!-- API key setup modal (shown once until a key is saved) -->
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <h2 id="modalTitle">Connect your OpenWeatherMap API key</h2>
+      <p>
+        SkyBoard needs a free OpenWeatherMap API key to fetch live weather.
+        Get one at
+        <a href="https://home.openweathermap.org/api_keys" target="_blank" rel="noopener">openweathermap.org</a>,
+        then paste it below. It's saved only in this browser.
+      </p>
+      <form id="apiKeyForm">
+        <input
+          type="text"
+          id="apiKeyInput"
+          placeholder="Paste your API key here"
+          aria-label="OpenWeatherMap API key"
+          required
+        />
+        <button type="submit">Save &amp; continue</button>
+      </form>
+      <p class="modal-note">You can change this later from the key icon in the header.</p>
+    </div>
+  </div>
+
+  <script src="Weather App.js"></script>
+</body>
+</html>
